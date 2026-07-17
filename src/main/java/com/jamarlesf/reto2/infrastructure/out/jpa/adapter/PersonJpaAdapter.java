@@ -30,4 +30,11 @@ public class PersonJpaAdapter implements IPersonPersistencePort {
         }
         throw new DataNotFoundException("Persona con documento " + documentId + " no encontrada");
     }
+
+    @Override
+    public Person findByEmail(String email) {
+        return personRepository.findByEmail(email)
+                .map(personEntityMapper::toPerson)
+                .orElse(null);
+    }
 }
